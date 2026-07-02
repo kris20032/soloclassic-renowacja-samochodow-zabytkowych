@@ -405,6 +405,186 @@ section{padding-block:clamp(64px,8vw,128px)}
 .nav.is-stuck .brand-logo{height:34px}
 @media(max-width:680px){.brand-logo{height:32px}}
 
+/* === rodzina: auto === */
+/* ============================================================
+   RODZINA: AUTO (detailing / auto-serwis / powłoki / lakiernictwo / myjnia)
+   Doklejane NA WIERZCH base.css. Skin auto (Oswald + grafit/bursztyn).
+   Filozofia: PREMIUM, MĘSKO, TECHNICZNIE + "Umów termin". Jasna baza, ciemne kinowe hero, Oswald CAPS.
+   (Świadomie BEZ ciemnej bazy - dark-skin guard wymusza jasne tło; ciemne hero+paski daja dramat.)
+   FAZA 3 (research wf_5b470404, topowe studia detailingu/powłok): osobny układ - hero-auto (kicker+claim+1 CTA),
+   nav fixed przezroczysty->ciemny grafit + zwijany, spec-ribbon (sygnatura), pakiety powłok (1 ciemny band),
+   before/after suwak, poziomy "bay" proces, marki. Pakiety/before-after/marki = BRAMKOWANE (tylko z reconu).
+   ============================================================ */
+
+/* --- Wersaliki na nagłówkach sekcji (motorsport/inżynierski sznyt) --- */
+.head h2{text-transform:uppercase;letter-spacing:.015em}
+.eyebrow{letter-spacing:.22em}
+
+/* --- Ostrzejsze, "techniczne" karty --- */
+.svc,.trust-card,.tile,.gateway,.svc-row-art,.split-art{border-radius:var(--r-sm)}
+
+/* --- STICKY "Umów termin" (mobile) --- */
+.sticky-reserve{display:none}
+@media(max-width:820px){
+  .sticky-reserve{display:flex;position:fixed;left:0;right:0;bottom:0;z-index:90;
+    background:var(--line);box-shadow:0 -6px 20px -10px rgba(0,0,0,.4)}
+  .sticky-reserve a{padding:15px 8px;text-align:center;font-weight:700;font-size:.95rem;text-transform:uppercase;letter-spacing:.03em}
+  .sr-book{flex:1;background:var(--accent);color:#fff}
+  .sr-call{width:60px;background:var(--paper);color:var(--ink);font-size:1.15rem;border-left:1px solid var(--line)}
+  body{padding-bottom:56px}
+}
+
+/* ============================================================
+   FAZA 3 - OSOBNY UKŁAD AUTO (detailing/powłoki). Wszystko poniżej doklejane na wierzch.
+   ============================================================ */
+
+/* --- Brass = ciemny tekst dla kontrastu (mosiądz #c8a04a + biel = za słaby kontrast) --- */
+.btn-accent{color:#14171c}
+.btn-accent:hover{color:#14171c}
+
+/* === HERO AUTO: pełnoekranowe ciemne kino, blok dolny-lewy, Ken Burns, kontrast gwarantowany === */
+.hero-auto{position:relative;height:100vh;height:100svh;min-height:560px;display:flex;align-items:flex-end;overflow:hidden;isolation:isolate;background:#0a0c0f}
+.hero-auto .ha-bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:-2;will-change:transform}
+/* Ken Burns = TYLKO scale (zero translate = zero dryfu), DESKTOP-only (min-width:900) - zgodnie z konwencją base.css heroBreath, anty-jank na mobile */
+@keyframes haKen{from{transform:scale(1.04)}to{transform:scale(1.12)}}
+@media(min-width:900px){.hero-auto .ha-bg{animation:haKen 30s ease-out infinite alternate}}
+/* Kontrast GWARANTOWANY niezależnie od zdjęcia: (a) ciemna LEWA kolumna pod tekstem (tekst jest do lewej, top->bottom),
+   (b) górny scrim pod nav + dolny scrim. Nie liczymy na ciemne zdjęcie. */
+.hero-auto .ha-veil{position:absolute;inset:0;z-index:-1;
+  background:linear-gradient(90deg,rgba(10,12,15,.76) 0%,rgba(10,12,15,.34) 32%,rgba(10,12,15,0) 60%),
+             linear-gradient(180deg,rgba(10,12,15,.42) 0%,rgba(10,12,15,0) 30%,rgba(10,12,15,.55) 78%,rgba(10,12,15,.82) 100%)}
+.ha-inner{position:relative;z-index:2;margin:0 0 clamp(2.6rem,7vh,5rem) clamp(1.4rem,5vw,4rem);max-width:32ch}
+.ha-tick{display:block;width:48px;height:3px;background:var(--accent);margin-bottom:clamp(1rem,2.4vh,1.6rem)}
+.ha-kicker{display:block;font-family:var(--font-display);font-weight:600;text-transform:uppercase;
+  letter-spacing:.22em;font-size:clamp(.72rem,1.4vw,.86rem);color:var(--accent);text-shadow:0 1px 10px rgba(0,0,0,.5)}
+.ha-claim{font-family:var(--font-display);font-weight:700;text-transform:uppercase;letter-spacing:.005em;line-height:1.02;
+  font-size:clamp(2.3rem,5.6vw,4.4rem);color:#fff;margin:clamp(.7rem,1.6vh,1.1rem) 0 clamp(1.5rem,3vh,2.2rem);
+  text-shadow:0 2px 18px rgba(0,0,0,.55)}
+.ha-cta{margin:0}
+.ha-rating{margin:clamp(1rem,2vh,1.4rem) 0 0;color:#fff;font-weight:600;letter-spacing:.02em;font-size:var(--text-sm);opacity:.94;text-shadow:0 1px 10px rgba(0,0,0,.5)}
+@media(max-width:640px){.ha-claim{font-size:clamp(2rem,9vw,2.7rem)}.ha-inner{margin-bottom:clamp(2rem,9vh,3.4rem)}}
+@media(prefers-reduced-motion:reduce){.hero-auto .ha-bg{animation:none}}
+
+/* === SPEC-RIBBON: poziomy pasek etykiet usług tuż pod hero (sygnatura strukturalna, NIE liczby) === */
+.spec-ribbon{background:var(--paper);border-bottom:1px solid var(--line);padding-block:0}
+.spec-ribbon .wrap{padding-block:var(--space-5)}
+.sr-row{display:flex;flex-wrap:wrap;justify-content:center;align-items:center;gap:clamp(.8rem,2.4vw,2rem);list-style:none;margin:0;padding:0}
+.sr-row li{font-family:var(--font-display);font-weight:600;text-transform:uppercase;letter-spacing:.14em;
+  font-size:clamp(.7rem,1.3vw,.82rem);color:var(--ink-soft);display:flex;align-items:center}
+.sr-row li:not(:last-child)::after{content:"";width:5px;height:5px;border-radius:50%;background:var(--accent);margin-left:clamp(.8rem,2.4vw,2rem)}
+
+/* === PAKIETY POWŁOK: jedyny ciemny carbon-band w jasnej stronie (BRAMKOWANE) === */
+.auto-dark{background:var(--ink)}
+.auto-dark .head h2{color:#fff}
+.auto-dark .head p{color:rgba(244,245,247,.74)}
+.auto-dark .eyebrow{color:var(--accent)}
+.auto-dark .eyebrow::before{background:var(--accent)}
+.pakiety-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--space-6);margin-top:var(--space-8)}
+.pakiet{background:rgba(255,255,255,.045);border:1px solid rgba(255,255,255,.12);border-radius:var(--r-sm);
+  padding:var(--space-7) var(--space-6);display:flex;flex-direction:column;gap:var(--space-4)}
+.pakiet h3{font-family:var(--font-display);text-transform:uppercase;letter-spacing:.04em;color:#fff;font-size:1.3rem}
+.pak-lata{display:flex;align-items:baseline;gap:.5rem}
+.pak-lata b{font-family:var(--font-display);font-size:2.4rem;line-height:1;color:var(--accent);font-weight:700}
+.pak-lata span{font-size:var(--text-sm);color:rgba(244,245,247,.7);text-transform:uppercase;letter-spacing:.08em}
+.pak-opis{color:rgba(244,245,247,.76);font-size:var(--text-base);line-height:1.6}
+.pak-zakres{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:.6rem}
+.pak-zakres li{position:relative;padding-left:1.4rem;padding-bottom:.6rem;color:rgba(244,245,247,.84);
+  font-size:var(--text-sm);border-bottom:1px solid rgba(255,255,255,.08)}
+.pak-zakres li::before{content:"";position:absolute;left:0;top:.55em;width:8px;height:2px;background:var(--accent)}
+.pak-cena{margin-top:auto;font-family:var(--font-display);font-size:1.3rem;color:#fff;letter-spacing:.01em}
+.pak-cta{margin-top:auto;color:var(--accent);font-weight:600;font-size:var(--text-sm);display:inline-flex;align-items:center;gap:.4rem}
+.pak-cta:hover{color:#fff}
+@media(max-width:900px){.pakiety-grid{grid-template-columns:1fr;max-width:32rem;margin-inline:auto}}
+
+/* === BEFORE / AFTER: suwak (JASNE, NIE ciemny band). Oba zdjęcia full-size = ten sam kadr; clip-path odsłania === */
+.auto-ba .ba-slider{position:relative;--ba-pos:50%;max-width:62rem;margin:var(--space-8) auto 0;aspect-ratio:16/9;
+  overflow:hidden;border-radius:var(--r-sm);border:1px solid var(--line);touch-action:none;user-select:none;cursor:ew-resize}
+.ba-slider img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
+.ba-before-wrap{position:absolute;inset:0;clip-path:inset(0 calc(100% - var(--ba-pos)) 0 0)}
+.ba-lab{position:absolute;top:var(--space-4);z-index:3;font-family:var(--font-display);text-transform:uppercase;
+  letter-spacing:.1em;font-size:.7rem;color:#fff;background:rgba(10,12,15,.6);padding:.3rem .6rem;border-radius:2px}
+.ba-lab-l{left:var(--space-4)}
+.ba-lab-r{right:var(--space-4)}
+.ba-handle{position:absolute;top:0;bottom:0;left:var(--ba-pos);width:2px;background:var(--accent);transform:translateX(-1px);z-index:4;pointer-events:none}
+.ba-handle span{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:38px;height:38px;border-radius:50%;
+  background:var(--accent);box-shadow:0 2px 12px rgba(0,0,0,.4);display:flex;align-items:center;justify-content:center}
+.ba-handle span::before,.ba-handle span::after{content:"";position:absolute;width:0;height:0;border-block:5px solid transparent}
+.ba-handle span::before{left:9px;border-right:6px solid #14171c}
+.ba-handle span::after{right:9px;border-left:6px solid #14171c}
+.ba-podpis{text-align:center;color:var(--muted);font-size:var(--text-sm);margin-top:var(--space-5)}
+
+/* === PROCES AUTO: poziomy "bay" stepper (top-border + numer) - inny kształt niż wspólny pionowy timeline === */
+.auto-proc-row{list-style:none;margin:var(--space-8) 0 0;padding:0;display:grid;grid-template-columns:repeat(4,1fr);gap:var(--space-6)}
+.auto-proc-row li{position:relative;padding-top:var(--space-5);border-top:2px solid var(--line)}
+.auto-proc-row li::before{content:"";position:absolute;top:-2px;left:0;width:42%;height:2px;background:var(--accent)}
+.ap-no{font-family:var(--font-display);font-weight:700;color:var(--accent);font-size:1.05rem;letter-spacing:.12em}
+.auto-proc-row h3{font-family:var(--font-display);text-transform:uppercase;letter-spacing:.02em;font-size:1.1rem;margin:.5rem 0 .4rem}
+.auto-proc-row p{color:var(--muted);font-size:var(--text-sm);line-height:1.55}
+@media(max-width:760px){.auto-proc-row{grid-template-columns:1fr 1fr;gap:var(--space-7) var(--space-5)}}
+@media(max-width:420px){.auto-proc-row{grid-template-columns:1fr}}
+
+/* === MARKI / CZYM PRACUJEMY: nazwy tekstem (bez logotypów) - eyebrow neutralny (krytyka 4a) === */
+.auto-marki .marki-list{display:flex;flex-wrap:wrap;justify-content:center;gap:clamp(.8rem,2.5vw,1.6rem);list-style:none;margin:var(--space-7) 0 0;padding:0}
+.auto-marki .marki-list li{font-family:var(--font-display);text-transform:uppercase;letter-spacing:.12em;font-weight:600;
+  font-size:clamp(.82rem,1.5vw,1rem);color:var(--ink-soft);padding:.5rem 1rem;border:1px solid var(--line);border-radius:var(--r-sm)}
+.marki-gwar{text-align:center;color:var(--muted);font-size:var(--text-sm);margin-top:var(--space-6)}
+
+/* === sticky-reserve: brass z ciemnym tekstem (kontrast) === */
+.sticky-reserve .sr-book{color:#14171c}
+
+/* === OPINIE (realne recenzje Google) - dodane dla rodziny auto === */
+.opinie{padding-block:var(--space-9);background:var(--bg)}
+.opinie .head{margin-bottom:var(--space-2)}
+.opinie-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(16rem,1fr));gap:var(--space-6);margin-top:var(--space-8)}
+.op-card{margin:0;background:var(--paper);border:1px solid var(--line);border-radius:var(--r-md);padding:var(--space-6);display:flex;flex-direction:column;gap:var(--space-3);box-shadow:0 1px 2px rgba(0,0,0,.04)}
+.op-star{color:var(--accent-d,var(--accent));letter-spacing:.1em;font-size:.95rem}
+.op-card blockquote{margin:0;color:var(--ink-soft);font-size:var(--text-base);line-height:1.6}
+.op-autor{font-family:var(--font-display);font-weight:700;color:var(--ink);font-size:.95rem}
+
+/* === NAV NOBU (silnik): auto === */
+.nav{position:fixed;left:0;right:0;backdrop-filter:none;border-bottom:1px solid transparent;z-index:100;transition:transform .35s var(--ease),background .35s ease,box-shadow .35s ease}
+.nav.nav-hidden{transform:translateY(-100%)}
+.nav.is-stuck{background:transparent;box-shadow:none;border-bottom-color:transparent}
+.nav.is-stuck .nav-inner{height:64px}
+.nav .brand{flex-direction:row;align-items:baseline;gap:.6rem;line-height:1}
+.nav .brand .name{font-family:var(--font-display);font-weight:600;font-size:1.5rem;text-transform:uppercase;letter-spacing:.14em}
+.nav .brand .sub{margin-top:0;padding-left:.65rem;border-left:1px solid currentColor;font-size:.66rem;font-weight:600;letter-spacing:.22em;text-transform:uppercase}
+.nav .nav-links a{font-size:.8rem;font-weight:600;text-transform:uppercase;letter-spacing:.1em;padding-block:6px}
+.nav .nav-links a::after{height:1px}
+.nav .nav-links a.btn-accent{font-size:.73rem;font-weight:700;text-transform:uppercase;letter-spacing:.12em;padding:.5rem 1.1rem;border-radius:4px;box-shadow:none}
+.nav .nav-links a.btn-accent:hover{transform:none;box-shadow:none}
+.nav .nav-links a.btn-accent{background:var(--accent);border:1px solid var(--accent);color:#14171c}
+.nav .nav-links a.btn-accent:hover{background:var(--accent);border-color:var(--accent);color:#14171c;filter:brightness(1.07)}
+.nav{background:transparent}
+.nav::after{content:"";position:absolute;left:0;right:0;top:0;height:150px;z-index:-1;pointer-events:none;transition:opacity .35s ease;background:linear-gradient(180deg,rgba(8,6,4,.55) 0%,rgba(8,6,4,0) 100%)}
+.nav.nav-solid::after{opacity:0}
+.nav .brand .name{color:#f5f1ea}
+.nav .brand .sub{color:rgba(245,241,234,.82)}
+.nav .nav-links a:not(.btn-accent){color:rgba(245,241,234,.9)}
+.nav .nav-links a:not(.btn-accent):hover,.nav .nav-links a.active:not(.btn-accent){color:#fff}
+.nav .nav-links a:not(.btn-accent)::after{background:#fff}
+.nav .nav-toggle span{background:#f5f1ea}
+.nav.nav-solid{background:rgba(12,13,16,.92);backdrop-filter:saturate(130%) blur(10px);border-bottom:1px solid rgba(255,255,255,.10)}
+.nav.nav-solid .brand .sub{color:var(--accent)}
+.nav.nav-solid.nav-hidden{background:transparent;box-shadow:none;border-bottom-color:transparent}
+@media(min-width:681px){
+.nav .nav-inner{position:relative;height:64px}
+.nav .nav-links{flex:1;justify-content:center;gap:clamp(1rem,2.2vw,1.9rem);padding-right:12rem}
+.nav .nav-links a.btn-accent{position:absolute;right:0;top:50%;transform:translateY(-50%);margin:0}
+.nav:not(.nav-solid) .nav-links a.btn-accent{background:transparent;border-color:rgba(245,241,234,.55);color:#f5f1ea}
+.nav:not(.nav-solid) .nav-links a.btn-accent:hover{background:var(--accent);border-color:var(--accent);color:#14171c;transform:translateY(-50%)}
+}
+@media(max-width:680px){
+.nav .nav-links:not(.open){transform:translateY(-160%);visibility:hidden}
+.nav .nav-links.open{visibility:visible}
+.nav .brand .name{font-size:1.12rem;letter-spacing:.1em}
+.nav .brand .sub{display:none}
+.nav .brand{min-width:0;overflow:hidden}
+.nav .nav-links{background:var(--paper)}
+.nav .nav-links a:not(.btn-accent){color:var(--ink-soft)}
+.nav .nav-links a:not(.btn-accent):hover,.nav .nav-links a.active:not(.btn-accent){color:var(--ink)}
+}
+
 /* === focal-point zdjęć (smartcrop) — cover nie utnie twarzy/obiektu === */
 img[src$="/g5.jpg"]{object-position:42% 50%}
 [style*="g5.jpg"]{background-position:42% 50%}
